@@ -26,9 +26,9 @@ class UserSerializer(ModelSerializer):
 
 class UserInfoSerializer(ModelSerializer):
     def create(self, data, request):
-        instance.user_id = str(request.user.id)
-        instance.save()
-        return instance
+        user = UserInfo(age=data.get('age'), sex=data.get('sex'), user_id=request.user.id)
+        user.save()
+        return user
 
     class Meta:
         model = UserInfo
