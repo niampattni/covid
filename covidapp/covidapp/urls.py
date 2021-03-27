@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserView
+from .views import UserView, InfoView, RiskView
 
 app_name = 'covidapp'
 urlpatterns = [
