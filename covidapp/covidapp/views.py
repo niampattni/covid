@@ -2,13 +2,11 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser
 from .models import UserInfo, Age, Sex, Loc
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserInfo, AgeSerializer, SexSerializer, LocSerializer
 # Create your views here.
 class UserView(APIView):
-    permission_class = [IsAdminUser]
 
     def get(self, format=None):
         users = User.objects.all()
