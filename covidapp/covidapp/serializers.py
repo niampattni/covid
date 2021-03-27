@@ -25,6 +25,11 @@ class UserSerializer(ModelSerializer):
         ]
 
 class UserInfoSerializer(ModelSerializer):
+    def create(self, data, request):
+        instance.user_id = str(request.user.id)
+        instance.save()
+        return instance
+
     class Meta:
         model = UserInfo
         fields = '__all__'
