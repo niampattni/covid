@@ -12,7 +12,7 @@ class UserView(APIView):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-        
+
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
@@ -30,6 +30,11 @@ class UserView(APIView):
         status=status.HTTP_400_BAD_REQUEST
 
 class InfoView(APIView):
+    def get(self, format=None):
+        users = UserInfo.objects.all()
+        serializer = UserInfoSerializer(users, many=True)
+        return Response(serializer.data)
+        
     def post(self, request):
         c = connection.cursor()
         age = request.data.get('age')
@@ -38,6 +43,11 @@ class InfoView(APIView):
         c.execute("INSERT INTO covidapp_userinfo (age, sex, user_id) VALUES (" + str(age) + ", " + str(sex) + ", " + str(id) + ");")
 
 class RiskView(APIView):
+    def get(self, format=None):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+        
     def get(seld, request, format=None):
         c = connection.cursor()
         c.execute("SELECT * FROM covidapp_userinfo WHERE user_id = " + str(request.user.id) + ";")
