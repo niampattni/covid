@@ -6,7 +6,7 @@ from .models import UserInfo, Age, Sex, Loc
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserInfo, AgeSerializer, SexSerializer, LocSerializer
 # Create your views here.
-class UserView(viewsets.ModelViewSet):
+class UserView(APIView):
     def get(self, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
@@ -28,14 +28,14 @@ class UserView(viewsets.ModelViewSet):
         )
         status=status.HTTP_400_BAD_REQUEST
 
-class AgeView(viewsets.ModelViewSet):
+class AgeView(APIView):
     queryset = Age.objects.all()
     serializer_class = AgeSerializer
 
-class SexView(viewsets.ModelViewSet):
+class SexView(APIView):
     queryset = Sex.objects.all()
     serializer_class = SexSerializer
 
-class LocView(viewsets.ModelViewSet):
+class LocView(APIView):
     queryset = Loc.objects.all()
     serializer_class = LocSerializer
