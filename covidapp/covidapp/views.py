@@ -40,8 +40,7 @@ class InfoView(APIView):
         if serializer.is_valid(raise_exception=ValueError):
             serializer.create(data=request.data, request=request)
             return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
+                serializer.data
             )
         return Response(
             {
@@ -49,7 +48,6 @@ class InfoView(APIView):
                 'error_msg': serializer.error_messages,
             }
         )
-        status=status.HTTP_400_BAD_REQUEST
         # c = connection.cursor()
         # age = request.data.get('age')
         # sex = request.data.get('sex')
