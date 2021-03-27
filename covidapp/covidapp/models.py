@@ -13,6 +13,7 @@ class Age(models.Model):
 class Sex(models.Model):
     sex = models.CharField(max_length=1)
     prob = models.DecimalField(max_digits=4,decimal_places=2)
+    age_group = models.ForeignKey(Age, on_delete=models.CASCADE)
 
 class Loc(models.Model):
     name = models.CharField(max_length=30)
