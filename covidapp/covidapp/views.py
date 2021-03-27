@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserInfo, AgeSerializer, SexSerializer, LocSerializer
 # Create your views here.
 class UserView(APIView):
+    permission_class = [IsUserAdmin]
+
     def get(self, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
