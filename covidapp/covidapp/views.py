@@ -60,7 +60,7 @@ class RiskView(APIView):
         sexprob = Sex.objects.get(age_group_id=agegroup, sex=user.sex).prob
         sexprob /= 100
         expfac = request.data.get('exp')
-        expfac = 10 * (expfac - 10)
+        expfac = 10 * expfac
         locfac = Loc.objects.get(category=str(request.data.get('location'))).risk
         locfac = 1 / locfac
         risk = ageprob * sexprob * expfac * locfac
