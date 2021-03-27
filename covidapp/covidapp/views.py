@@ -48,23 +48,22 @@ class InfoView(APIView):
                 'error_msg': serializer.error_messages,
             }
         )
-        # c = connection.cursor()
-        # age = request.data.get('age')
-        # sex = request.data.get('sex')
-        # id = request.user.id
-        # c.execute("INSERT INTO covidapp_userinfo (age, sex, user_id) VALUES (" + str(age) + ", " + str(sex) + ", " + str(id) + ");")
 
-class RiskView(APIView):
-    def get(self, format=None):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-        
-    def get(seld, request, format=None):
+class RiskView(APIView):      
+    def get(self, request, format=None):
         c = connection.cursor()
         c.execute("SELECT * FROM covidapp_userinfo WHERE user_id = " + str(request.user.id) + ";")
-        c.fetchall()
+        user = c.fetchall()
         location = request.data.get('location')
+        c.execute("SELECT prob FROM covidapp_age WHERE covidapp_age.age_max = " + str(user[1]) + ";")
+        ageprob = c.fetchall()
+        c.execute("SELECT prob FROM covidapp_sex WHERE covidapp_sex.sex = " + str(user[2]) + ";")
+        sexprob = c.fetchall()
+        c.execute("SELECT risk, outbreak FROM covidapp_loc WHERE covidapp_loc.name = " + str(location) + ";")
+        locinfo = c.fetchall()
+        locrisk = locinfo[0] #maybe [0][0]
+        locout = locinfo[1] #maybe [0][1]
+        risk = 0
         #perform risk calculation here and return json response
         return Response(risk)
 
