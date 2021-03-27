@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import UserInfo, Age, Sex, Loc
-deom django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from rest_framework.validators import UniqueTogetherValidator
 
 class UserSerializer(ModelSerializer):
