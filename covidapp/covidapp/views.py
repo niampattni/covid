@@ -49,22 +49,17 @@ class InfoView(APIView):
             }
         )
 
-class RiskView(APIView):      
+class RiskView(APIView):
     def get(self, request, format=None):
-        c = connection.cursor()
-        c.execute("SELECT * FROM covidapp_userinfo WHERE user_id = " + str(request.user.id) + ";")
-        user = c.fetchall()
-        location = request.data.get('location')
-        c.execute("SELECT prob FROM covidapp_age WHERE covidapp_age.age_max = " + str(user[1]) + ";")
-        ageprob = c.fetchall()
-        c.execute("SELECT prob FROM covidapp_sex WHERE covidapp_sex.sex = " + str(user[2]) + ";")
-        sexprob = c.fetchall()
-        c.execute("SELECT risk, outbreak FROM covidapp_loc WHERE covidapp_loc.name = " + str(location) + ";")
-        locinfo = c.fetchall()
-        locrisk = locinfo[0] #maybe [0][0]
-        locout = locinfo[1] #maybe [0][1]
-        risk = 0
-        #perform risk calculation here and return json response
+        user = UserInfo.objects.get(user_id=str(request.user.id))
+        agegroup = user.age // 10
+        if agegroup == 0:
+            agegroup += 1
+        ageprob = Age.objects.get(id=agegroup).prob
+        sexprob = Sex.objects.get(age_group_id=agegroup, sex=user.sex).prob
+        expfac = 10 * (request.data.get('exp') - 10)
+        locfac = 1 / Loc.objects.get(category=str(request.data.get('location'))).risk
+        risk = ageprob * sexprob * expfac * locfac
         return Response(risk)
 
 class AgeView(APIView):
