@@ -21,8 +21,10 @@ class UserView(viewsets.ModelViewSet):
                 status=status.HTTP_201_CREATED
             )
         return Response(
-            'error': True,
-            'error_msg': serializer.error_messages,
+            {
+                'error': True,
+                'error_msg': serializer.error_messages,
+            }
         )
         status=status.HTTP_400_BAD_REQUEST
 
