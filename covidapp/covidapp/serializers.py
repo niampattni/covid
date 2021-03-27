@@ -2,9 +2,9 @@ from rest_framework.serializers import ModelSerializer
 from covidapp.covidapp.models import User, Age, Sex, Loc
 
 class UserSerializer(ModelSerializer):
-    def create(self, data):
-        user= User.objects.create_user(**data)
-        return user
+#    def create(self, data):
+#        user= User.objects.create_user(**data)
+#        return user
 
     class Meta:
         model = User

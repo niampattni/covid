@@ -17,8 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
-from covidapp.covidapp.views import UserViewSet, AgeViewSet, SexViewSet, LocViewSet
-from .views import UserView
+from .covidapp.views import UserViewSet, AgeViewSet, SexViewSet, LocViewSet
 
 router = DefaultRouter()
 router.register(r"user", UserViewSet)
