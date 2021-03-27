@@ -1,1 +1,34 @@
+insert into covidapp_age (min_age, prob) values (0, 18.88);
+insert into covidapp_age (min_age, prob) values (20, 27.90);
+insert into covidapp_age (min_age, prob) values (30, 19.12);
+insert into covidapp_age (min_age, prob) values (40, 10.03);
+insert into covidapp_age (min_age, prob) values (50, 9.41);
+insert into covidapp_age (min_age, prob) values (60, 7.52);
+insert into covidapp_age (min_age, prob) values (70, 5.01);
+insert into covidapp_age (min_age, prob) values (80, 2.82);
 
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 46.55, 1);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 46.07, 2);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 52.46, 3);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 50.00, 4);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 60.00, 5);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 45.83, 6);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 50.00, 7);
+insert into covidapp_sex (sex, prob, age_group_id) values ("m", 44.44, 8);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 53.45, 1);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 53.93, 2);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 47.54, 3);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 50.00, 4);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 40.00, 5);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 54.17, 6);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 50.00, 7);
+insert into covidapp_sex (sex, prob, age_group_id) values ("f", 55.55, 8);
+
+insert into covidapp_loc (category, risk) values ("retirement", 0.3483);
+insert into covidapp_loc (category, risk) values ("workplace", 0.0435);
+insert into covidapp_loc (category, risk) values ("hospital", 0.0435);
+insert into covidapp_loc (category, risk) values ("homeless", 0.0870);
+insert into covidapp_loc (category, risk) values ("school", 0.1739);
+insert into covidapp_loc (category, risk) values ("gym", 0.2739);
+insert into covidapp_loc (category, risk) values ("restaurant", 0.2130);
+insert into covidapp_loc (category, risk) values ("grocery", 0.0609);

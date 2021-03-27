@@ -7,7 +7,7 @@ class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Age(models.Model):
-    age_max = models.IntegerField()
+    min_age = models.IntegerField()
     prob = models.DecimalField(max_digits=4,decimal_places=2)
 
 class Sex(models.Model):
@@ -16,6 +16,5 @@ class Sex(models.Model):
     age_group = models.ForeignKey(Age, on_delete=models.CASCADE)
 
 class Loc(models.Model):
-    name = models.CharField(max_length=30)
-    risk = models.DecimalField(max_digits=4,decimal_places=2)
-    outbreak = models.DecimalField(max_digits=4,decimal_places=2)
+    category = models.CharField(max_length=30)
+    risk = models.DecimalField(max_digits=5,decimal_places=4)
