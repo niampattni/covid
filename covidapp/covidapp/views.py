@@ -63,6 +63,8 @@ class RiskView(APIView):
         expfac = 10 * expfac
         locfac = Loc.objects.get(category=str(request.data.get('location'))).risk
         locfac = 1 / locfac
+        if expfac == 0:
+            expfac += 1
         risk = ageprob * sexprob * expfac * locfac
         return Response(risk)
 
