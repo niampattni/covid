@@ -32,7 +32,7 @@ class UserInfoSerializer(ModelSerializer):
 
     class Meta:
         model = UserInfo
-        fields = '__all__'
+        fields = ('age', 'sex', 'user_id')
 
 class AgeSerializer(ModelSerializer):
     class Meta:

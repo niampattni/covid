@@ -36,11 +36,14 @@ class InfoView(APIView):
         return Response(serializer.data)
         
     def post(self, request):
-        c = connection.cursor()
-        age = request.data.get('age')
-        sex = request.data.get('sex')
-        id = request.user.id
-        c.execute("INSERT INTO covidapp_userinfo (age, sex, user_id) VALUES (" + str(age) + ", " + str(sex) + ", " + str(id) + ");")
+        serializer = UserInfoSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(data=request.data, request=request)
+        # c = connection.cursor()
+        # age = request.data.get('age')
+        # sex = request.data.get('sex')
+        # id = request.user.id
+        # c.execute("INSERT INTO covidapp_userinfo (age, sex, user_id) VALUES (" + str(age) + ", " + str(sex) + ", " + str(id) + ");")
 
 class RiskView(APIView):
     def get(self, format=None):
