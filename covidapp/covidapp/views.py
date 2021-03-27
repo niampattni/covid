@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import UserInfo, Age, Sex, Loc
 from django.contrib.auth.models import User
-from .serializers import UserSerializer, UserInfo, AgeSerializer, SexSerializer, LocSerializer
+from .serializers import UserSerializer, UserInfoSerializer, AgeSerializer, SexSerializer, LocSerializer
 from django.db import connection
 # Create your views here.
 class UserView(APIView):    
