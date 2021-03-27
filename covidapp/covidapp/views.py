@@ -50,7 +50,7 @@ class InfoView(APIView):
         )
 
 class RiskView(APIView):
-    def get(self, request, format=None):
+    def post(self, request):
         user = UserInfo.objects.get(user_id=str(request.user.id))
         agegroup = user.age // 10
         if agegroup == 0:
