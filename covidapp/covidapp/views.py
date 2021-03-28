@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import UserInfo, Age, Sex, Loc
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserInfoSerializer, AgeSerializer, SexSerializer, LocSerializer
 from django.db import connection
@@ -61,6 +62,11 @@ class RiskView(APIView):
             expfac += 1
         risk = 4 * (((ageprob + sexprob) / locfac) + expfac)
         return Response(risk)
+
+class LogoutView(APIView):
+    def get(self, request, format=None):
+        if request.user.is_active:
+            logout(request)
 
 class AgeView(APIView):
     queryset = Age.objects.all()
