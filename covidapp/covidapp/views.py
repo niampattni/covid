@@ -13,8 +13,7 @@ class UserView(APIView):
         if serializer.is_valid(raise_exception=ValueError):
             serializer.create(data=request.data, request=request)
             return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
+                serializer.data
             )
         return Response(
             {
@@ -22,7 +21,6 @@ class UserView(APIView):
                 'error_msg': serializer.error_messages,
             }
         )
-        status=status.HTTP_400_BAD_REQUEST
 
 class InfoView(APIView):
     def get(self, format=None):
