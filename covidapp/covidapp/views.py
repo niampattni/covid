@@ -53,16 +53,13 @@ class RiskView(APIView):
         sexprob = Sex.objects.get(age_group_id=agegroup, sex=user.sex).prob
         sexprob /= 100
         expfac = request.data.get('exp')
-        expfac = calcExpFac(expfac)
+        expfac = (0.25 * (1 - pow(0.953, expfac))) / (1 - 0.953)
         locfac = Loc.objects.get(category=str(request.data.get('location'))).risk
         locfac = 1 / locfac
         if expfac == 0:
             expfac += 1
         risk = ageprob * sexprob * expfac * locfac
         return Response(risk)
-    
-    def calcExpFac(a, r, n):
-        sum = (a * (1 - pow(r, n)))/(1-r)
 
 class AgeView(APIView):
     queryset = Age.objects.all()
