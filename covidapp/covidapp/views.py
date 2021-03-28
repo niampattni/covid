@@ -60,7 +60,7 @@ class RiskView(APIView):
         locfac = 1 / locfac
         if expfac == 0:
             expfac += 1
-        risk = ageprob * sexprob * expfac * locfac
+        risk = 4 * ((ageprob * sexprob * locfac) + expfac)
         return Response(risk)
 
 class AgeView(APIView):
