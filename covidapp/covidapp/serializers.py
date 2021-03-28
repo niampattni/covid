@@ -1,11 +1,14 @@
 from rest_framework.serializers import ModelSerializer
 from .models import UserInfo, Age, Sex, Loc
 from django.contrib.auth.models import User
+from django.contrib.auth import login
+from django.conf import settings
 from rest_framework.validators import UniqueTogetherValidator
 
 class UserSerializer(ModelSerializer):
-    def create(self, data):
+    def create(self, data, request):
         user= User.objects.create_user(**data)
+        login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
         return user
 
     class Meta:

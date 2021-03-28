@@ -8,15 +8,10 @@ from .serializers import UserSerializer, UserInfoSerializer, AgeSerializer, SexS
 from django.db import connection
 # Create your views here.
 class UserView(APIView):    
-    def get(self, format=None):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(data=request.data)
+            serializer.create(data=request.data, request=request)
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
@@ -60,13 +55,16 @@ class RiskView(APIView):
         sexprob = Sex.objects.get(age_group_id=agegroup, sex=user.sex).prob
         sexprob /= 100
         expfac = request.data.get('exp')
-        expfac = 10 * expfac
+        expfac = calcExpFac(expfac)
         locfac = Loc.objects.get(category=str(request.data.get('location'))).risk
         locfac = 1 / locfac
         if expfac == 0:
             expfac += 1
         risk = ageprob * sexprob * expfac * locfac
         return Response(risk)
+    
+    def calcExpFac(a, r, n):
+        sum = (a * (1 - pow(r, n)))/(1-r)
 
 class AgeView(APIView):
     queryset = Age.objects.all()
