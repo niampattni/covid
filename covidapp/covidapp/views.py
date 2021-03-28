@@ -6,6 +6,7 @@ from .models import UserInfo, Age, Sex, Loc
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, UserInfoSerializer, AgeSerializer, SexSerializer, LocSerializer
 from django.db import connection
+from decimal import *
 # Create your views here.
 class UserView(APIView):    
     def post(self, request):
