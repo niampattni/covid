@@ -67,6 +67,7 @@ class LogoutView(APIView):
     def get(self, request, format=None):
         if request.user.is_active:
             logout(request)
+        return Response("Logged out")
 
 class AgeView(APIView):
     queryset = Age.objects.all()
